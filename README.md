@@ -2,7 +2,7 @@
 
 **End-to-end Business Analytics project** analyzing 180,519 supply chain orders to uncover revenue, delivery, and customer risks — built with `Python`, `PostgreSQL`, `SQL`, `Excel`, and `Power BI`.
 
-> 📉 Found a 56% revenue drop hiding behind rising order volume. 🚚 Found the "fastest" shipping option was actually the least reliable. 🔁 Verified true customer loyalty independently across three tools. Full story below.
+> 📉 📉 Found a Q4 2017 revenue collapse (-56% MoM) hiding behind rising order volume — full 3-year trend otherwise stable. 🚚 Found the "fastest" shipping option was actually the least reliable. 🔁 Verified true customer loyalty independently across three tools. Full story below.
 
 ![Overview](Screenshots/Overview.png)
 
@@ -65,7 +65,7 @@ Vantara-Smart-Supply-Chain-Intelligence-Platform/
 
 ## Key Insights & Visuals
 
-### 📉 Revenue dropped 56% in Q4 2017 — while order volume rose
+### 📉 Q4 2017 revenue collapse: $1.03M → $453K in 3 months (-56%) — despite steady 3-yr $900K–$1M/month baseline
 Revenue held a steady $900K–$1M/month rhythm through September 2017, then fell to $452.7K by December, despite order count actually *increasing* in that window — a sign of a pricing or data issue, not falling demand.
 
 ### 🚚 55% of all orders arrive late — and the premium option is worst
