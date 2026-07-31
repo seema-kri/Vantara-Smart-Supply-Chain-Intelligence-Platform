@@ -143,8 +143,7 @@ Revenue held a steady $900K–$1M/month rhythm across most of the three-year win
 ### 🚚 55% of all orders arrive late — and the premium option is the worst offender
 First Class shipping — the option customers pay more for — carries a **95% late-delivery rate**, far above Standard Class. This is not one underperforming carrier; it's a systemic fulfilment capacity problem sitting directly under Vantara's most expensive promise to customers.
 
-| Delivery Performance | Customer Insights |
-|---|---|
+
 | ![Delivery](Screenshots/Delivery%20Performance.png)
 ![Customers](Screenshots/Customer%20Insights.png) |
 
