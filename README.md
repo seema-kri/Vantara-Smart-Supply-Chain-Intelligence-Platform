@@ -145,7 +145,8 @@ First Class shipping — the option customers pay more for — carries a **95% l
 
 | Delivery Performance | Customer Insights |
 |---|---|
-| ![Delivery](Screenshots/Delivery_Performance.png) | ![Customers](Screenshots/Customer_Insights.png) |
+| ![Delivery](Screenshots/Delivery%20Performance.png)
+![Customers](Screenshots/Customer%20Insights.png) |
 
 ### 🔁 63.51% repeat customer rate — verified, not assumed
 A reference estimate of 76% was recalculated independently in SQL, DAX, and Excel. All three converged on the same real number: **63.51%**. Customer lifetime value is nearly flat across segments — Consumer's revenue lead comes from volume, not from higher spend per customer.
