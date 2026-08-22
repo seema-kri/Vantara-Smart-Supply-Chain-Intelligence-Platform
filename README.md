@@ -9,7 +9,6 @@
 ![Excel](https://img.shields.io/badge/Excel-Modeling-217346?logo=microsoftexcel&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
-📄 [BRD](Documentation/BRD.pdf) · 📊 [SQL Findings](Documentation/SQL_Business_Question_Analysis.pdf) · 📑 [Full Report](Documentation/Vantara_Findings_and_Recommendations.docx) · 📋 [Decisions Log](Documentation/Vantara_Decisions_Log.docx) · 📽️ [Presentation](Documentation/Presentation.pdf)
 
 ![Overview](Screenshots/Overview.png)
 
