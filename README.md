@@ -1,6 +1,6 @@
 # Vantara — Smart Supply Chain Intelligence Platform
 
-**A full-stack analytics case study: 180,519 order-line records → an executive Power BI dashboard, uncovering a hidden revenue collapse, a broken premium-shipping promise, and the true, verified customer loyalty rate.**
+**A full-stack analytics case study: 180,519 order-line records → an executive Power BI dashboard, uncovering a hidden Q4 revenue collapse, a masked growth-volatility problem, and an independently verified customer loyalty rate.**
 
 ![Python](https://img.shields.io/badge/Python-Pandas-3776AB?logo=python&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Star_Schema-4169E1?logo=postgresql&logoColor=white)
@@ -8,7 +8,6 @@
 ![Power BI](https://img.shields.io/badge/Power_BI-Dashboard-F2C811?logo=powerbi&logoColor=black)
 ![Excel](https://img.shields.io/badge/Excel-Modeling-217346?logo=microsoftexcel&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-lightgrey)
-
 
 ![Overview](Screenshots/Overview.png)
 
@@ -22,50 +21,51 @@ Vantara's order volume kept growing year over year, but leadership had no clear 
 
 **Dataset:** [DataCo Smart Supply Chain](https://www.kaggle.com/datasets/shashwatwork/dataco-smart-supply-chain-for-big-data-analysis) (Kaggle) · 180,519 order-line records · 2015–2017
 
-## What I Found
+---
 
-| Question | Answer | Impact |
-|---|---|---|
-| Is revenue growth real? | No — Q4 2017 revenue fell **-56% MoM** ($1.03M → $453K) while order volume rose | Points to a pricing/discounting or data-integrity failure, not falling demand |
-| Which shipping is best? | **First Class** (the premium option) has a **95% late-delivery rate** — worse than Standard | The service customers pay extra for is the least reliable one |
-| How loyal are customers? | **56.98% repeat rate**, independently verified in SQL, DAX, and Excel against an unverified 76% reference figure | The "true north" loyalty KPI leadership can actually trust |
-| Where's the profit? | **Fishing + Cleats ≈ 32%** of total profit | Tells leadership exactly where to defend margin |
-| Is the map honest? | No — global markets (England, Isle of France) lead by revenue, but the dashboard's U.S.-only map hides them | The business is more international than it looks |
+## 1. Executive KPIs (Overview page)
 
-![Delivery Performance](Screenshots/Delivery%20Performance.png)
-![Customer Insights](Screenshots/Customer%20Insights.png)
+1. **Total Revenue:** $32.76M
+2. **Total Orders:** 63,629
+3. **Sales Growth Rate:** 47.91%
+4. **Repeat Customer Rate:** 56.98%
+5. **Profit Margin:** 12%
+6. **Avg. Fulfilment Time:** 3.47 days
+7. **Unique Products:** 118
 
-## Beyond the Dashboard: 10 SQL Investigations
+---
 
-Ten window-function queries (ranking, running totals, moving averages, quartiles, lag/lead) went past the headline KPIs to stress-test the dashboard itself. Full write-up: **[SQL_Business_Question_Analysis.pdf](Documentation/SQL_Business_Question_Analysis.pdf)**
+## 2. What I Found
 
-Four issues flagged for fix before the next stakeholder review:
-- **Sales Growth Rate card is misleading.** MoM swings are volatile (-11.85% → +13.40% in one quarter), but the dashboard shows one flat number.
-- **Repeat-customer logic — verified.** Order-sequence method confirms the 56.98% figure is built on sound logic.
-- **Revenue map hides global markets.** Location data spans international markets; the visual only renders U.S. states.
-- **Late-delivery counts don't reconcile.** SQL shows 54.83% of order-lines are late (98,977 of ~180,519) — doesn't match the dashboard's 36.0K, revealing an order-line vs. distinct-order grain mismatch.
+1. **Revenue growth is not what it looks like.** In 2017, revenue held strong through September (peaking at **$1.03M**) then fell sharply to **$453K by December** — a ~56% drop — while order volume stayed steady. Rising volume was masking a Q4 collapse.
+2. **The single "Sales Growth Rate" card hides real volatility.** SQL analysis shows month-over-month swings as sharp as **-11.85% (Feb 2015)** followed by **+13.40% (Mar 2015)**. The flat 47.91% headline figure on the Overview page doesn't communicate this, and it isn't documented which single period it compares.
+3. **Customer loyalty is real, and now verified.** The **56.98% repeat customer rate** was independently recalculated and confirmed in SQL, DAX, and Excel using order-sequence logic (any customer with more than one order counts as repeat), replacing a prior unverified reference figure of 76%.
+4. **The dashboard has an internal inconsistency worth fixing.** The Customer Insights page KPI card reports **56.98%** repeat customers, but the narrative text on the same page states **63.51%** — the same page disagrees with itself, and this should be reconciled to one number before the next review.
+5. **First Class shipping is the best performer, not the worst.** Fulfilment time by shipping mode shows Standard and Second Class averaging **4 days**, twice as long as First Class at **2 days**. First Class is the platform's most reliable shipping tier — an underused selling point, not a problem.
+6. **Late delivery is the dominant delivery issue.** Of all delivery-status records, **36.0K are "Late delivery"** — far ahead of "Advance shipping" (15.1K), "Shipping on time" (11.7K), and "Shipping canceled" (2.9K), putting the late-delivery share at roughly **55%** of tracked deliveries.
+7. **That late-delivery figure doesn't reconcile with SQL.** SQL analysis counts late delivery at **54.83% of order-line records** (98,977 of ~180,519), while the dashboard's 36.0K figure is built at order/shipment grain — the two numbers agree directionally but not in raw count, because they're counting different things.
+8. **The revenue map hides Vantara's global footprint.** SQL ranks **England ("Inglaterra"), Isle of France, and California** as top revenue-generating locations, but the Power BI map visual only renders U.S. states — leaving most of the map gray and making the business look far more U.S.-concentrated than it is.
+9. **Fishing and Cleats anchor profitability.** These two categories alone contribute **~31.5% of total profit** (19.06% + 12.47%), and this ranking holds in the same order for both Consumer and Corporate segments — no need for segment-specific category strategy.
+10. **Consumer is the core segment.** Consumer drives **51.7%–51.9% of revenue** and **51.89% of orders** (34K of ~65K orders), ahead of Corporate (~30%) and Home Office (~18%) on both counts.
+11. **Customer value is broad, not concentrated.** Across 20,652 customers, average lifetime value sits close to **$1.59K–$1.6K per customer**, and this is surprisingly consistent across all three segments (Corporate $1,593, Consumer $1,591, Home Office $1,561) — Consumer's revenue lead comes from volume, not higher per-customer spend.
+12. **Puerto Rico and California are the top-contributing states.** Puerto Rico leads with 7,933 customers and ~$12.7M in revenue; California follows with 3,318 customers and ~$5.3M.
 
-## Executive KPIs
+---
 
-| Metric | Value |
-|---|---|
-| Total Revenue | $32.76M |
-| Total Orders | 63,629 |
-| Repeat Customer Rate | 56.98% |
-| Avg. Fulfilment Time | 3.47 days |
-| Profit Margin | 12% |
-| Late Delivery Rate | 54.83% |
+## 3. Recommendations
 
-## Recommendations
+1. **Investigate the Q4 2017 revenue collapse** — audit pricing, promotions, and data capture for October–December 2017.
+2. **Document and clarify the Sales Growth Rate calculation**, and add a trend sparkline or footnote so the 47.91% card isn't misread as a constant, stable figure.
+3. **Lock the repeat-customer definition (order sequence > 1) as the single source of truth**, and reconcile the Customer Insights page's 56.98% KPI card against its own 63.51% narrative text.
+4. **Promote First Class as the reliable shipping tier** rather than treating shipping mode as undifferentiated — it already outperforms Standard/Second Class 2x on speed.
+5. **Reconcile late-delivery counting** between SQL (order-line grain) and Power BI (order/shipment grain) so both report the same number at the same grain.
+6. **Replace the U.S.-only revenue map** with a world map view or add a market filter/toggle so international revenue (England, Isle of France) isn't hidden.
+7. **Protect the high-profit core** — prioritize inventory and marketing spend on Fishing and Cleats, platform-wide.
+8. **Build a customer value-tier (quartile) view** and an order-cadence/"days since last order" view on Customer Insights to power targeted marketing and win-back campaigns — the data already supports both; the dashboard currently has neither.
 
-1. **Investigate the Q4 2017 collapse** — audit pricing, promotions, and data capture for that window.
-2. **Fix premium shipping** — rework First Class SLAs and capacity so it reflects an actual premium service.
-3. **Fix the revenue map's scope** — switch to a world view or add a market filter.
-4. **Reconcile delivery-status counting** across SQL and DAX to a single grain.
-5. **Protect the high-profit core** — prioritize inventory and marketing on Fishing and Cleats.
-6. **Track repeat rate as an executive KPI**, segmented by region and customer type, to catch churn early.
+---
 
-## How It Was Built
+## 4. How It Was Built
 
 | Layer | Tools |
 |---|---|
@@ -77,7 +77,9 @@ Four issues flagged for fix before the next stakeholder review:
 
 Process: **BRD → Python cleaning → PostgreSQL star schema → SQL analysis → Excel cross-check → Power BI dashboard → written findings**, with every judgment call logged in the Decisions Log.
 
-## Repo Structure
+---
+
+## 5. Repo Structure
 
 ```
 Vantara-Smart-Supply-Chain-Intelligence-Platform/
@@ -90,7 +92,9 @@ Vantara-Smart-Supply-Chain-Intelligence-Platform/
 └── Screenshots/
 ```
 
-## How to Run
+---
+
+## 6. How to Run
 
 1. `git clone https://github.com/seema-kri/Vantara-Smart-Supply-Chain-Intelligence-Platform.git`
 2. Read `Documentation/BRD.pdf` for scope and success criteria.
@@ -100,13 +104,19 @@ Vantara-Smart-Supply-Chain-Intelligence-Platform/
 6. Open `Data/Vantara_Analysis_Model.xlsx` and refresh.
 7. Open `Dashboard/Vantara_Supply_Chain_Dashboard.pbix` in Power BI Desktop.
 
-## How I Used AI
+---
 
-Used an AI assistant to scaffold starter SQL, draft initial Python cleaning code, and suggest DAX/dashboard layout ideas — then reviewed, corrected, and independently re-verified every number across SQL, DAX, and Excel before trusting it. Where SQL and the dashboard disagreed (e.g. late-delivery counts), the mismatch was documented, not smoothed over.
+## 7. How I Used AI
 
-## Skills Demonstrated
+Used an AI assistant to scaffold starter SQL, draft initial Python cleaning code, and suggest DAX/dashboard layout ideas — then reviewed, corrected, and independently re-verified every number across SQL, DAX, and Excel before trusting it. Where SQL and the dashboard disagreed (e.g. late-delivery counts, repeat-rate figures), the mismatch was documented, not smoothed over.
+
+---
+
+## 8. Skills Demonstrated
 
 End-to-end pipeline ownership · relational database design · advanced SQL (window functions, CTEs) · cross-tool KPI validation · requirements discipline (BRD-first) · executive communication · transparent AI-assisted workflow.
+
+---
 
 ## Contact
 
